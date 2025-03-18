@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -53,6 +55,7 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            //val searchBarDescription = stringResource(R.string.searchbar_description)
             SearchBar(
                 query = searchQuery,
                 onQueryChange = { searchQuery = it },
@@ -67,6 +70,9 @@ fun MainScreen(onProductClick: (Int) -> Unit) {
                 },
                 placeholder = {
                     Text(
+                        modifier = Modifier.semantics {
+                           // contentDescription =
+                        },
                         text = stringResource(R.string.search_products),
                         color = Color(0xFFAAAAAA)
                     )
@@ -153,16 +159,18 @@ fun ProductCard(
                         color = Color(0xFFAAAAAA)
                     )
                 }
+                //val actionDescription = stringResource(R.string.add_product_to_cart, product.name)
                 Icon(
                     Icons.Default.ShoppingCart,
-                    contentDescription = stringResource(R.string.add_to_cart),
+                    contentDescription = null,
                     tint = Color(0xFFAAAAAA),
                     modifier = Modifier
-                        .clickable {
+                        .clickable(
+                            // onClickLabel =
+                        ) {
                             onAddToCart()
                         }
-                        .padding(0.dp)
-                        .size(8.dp)
+                        .size(16.dp)
                 )
             }
         }
